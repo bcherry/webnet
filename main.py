@@ -24,12 +24,13 @@ import os
 
 class MainHandler(webapp.RequestHandler):
 
-  def get(self):
-	path = os.path.join(os.path.dirname(__file__), 'index.html')
+  def get(self, uri):
+	uri = uri if ( len(uri) > 0 ) else 'index.html'
+	path = os.path.join(os.path.dirname(__file__), uri)
 	self.response.out.write(template.render(path, {}))
 
 def main():
-  application = webapp.WSGIApplication([('/', MainHandler)], debug=True)
+  application = webapp.WSGIApplication([('/(.*)', MainHandler)], debug=True)
   util.run_wsgi_app(application)
 
 if __name__ == '__main__':

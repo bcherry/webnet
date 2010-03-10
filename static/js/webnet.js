@@ -100,7 +100,6 @@
 		drawAll();
 	}
 	
-	$(function () {
-		go();
-	});
+	$(go); // you made an anonymous function call a function, refactored for you :)
+	
 }(window, window.console, Raphael, jQuery));
